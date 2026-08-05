@@ -1,0 +1,65 @@
+name: Organization Standardization & Automation
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: 'Operation mode: dry-run or apply'
+        required: true
+        default: 'apply'
+
+permissions:
+  contents: write
+
+jobs:
+  org-automation:
+    runs-on: ubuntu-latest
+    env:
+      ORG: Mind-Reply
+      INVENTORY_REF: org/standardize-1
+      OPERATION: ${{ github.event.inputs.operation }}
+    steps:
+      - name: Checkout org standards (inventory + templates)
+        uses: actions/checkout@v4
+        with:
+          repository: Mind-Reply/.github
+          ref: org/standardize-1
+          path: org-standards
+
+      - name: Setup Git
+        run: |
+          git config --global user.name "MR Org Bot"
+          git config --global user.email "noreply@mind-reply.com"
+
+      - name: Install prerequisites
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y jq git curl
+          # Install gh CLI
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+          sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          sudo apt update
+          sudo apt install -y gh
+
+      - name: Authenticate gh
+        env:
+          ORG_ADMIN_PAT: ${{ secrets.ORG_ADMIN_PAT }}
+        run: |
+          echo "$ORG_ADMIN_PAT" | gh auth login --with-token
+          gh auth status
+
+      - name: Run org automation script
+        env:
+          ORG_ADMIN_PAT: ${{ secrets.ORG_ADMIN_PAT }}
+          OPERATION: ${{ github.event.inputs.operation }}
+          ORG: Mind-Reply
+        run: |
+          bash org-standards/scripts/org-automation.sh
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: org-automation-logs
+          path: ./org-automation-logs || ./
