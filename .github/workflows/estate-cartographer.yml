@@ -1,0 +1,23 @@
+name: Estate Cartographer
+
+on:
+  schedule:
+    - cron: '11 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  metadata: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Record run metadata
+        run: |
+          set -euo pipefail
+          echo "agent=cartographer"
+          echo "scope=Mind-Reply,A11-K,angellllkr-eng"
+          echo "state=READ_ONLY"
+          echo "timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "No repository mutation is permitted by this workflow."
