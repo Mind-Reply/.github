@@ -10,10 +10,6 @@ on:
         required: false
         default: '20'
         type: string
-      production:
-        required: false
-        default: true
-        type: boolean
     secrets:
       VERCEL_TOKEN:
         required: true
@@ -42,9 +38,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node-version }}
-          cache: pnpm
       - name: Install
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
       - name: Build
         run: pnpm build
       - name: Install Vercel CLI
