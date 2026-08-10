@@ -1,0 +1,33 @@
+name: Security Guardian
+
+on:
+  schedule:
+    - cron: '31 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tracked-secret-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Check repository governance files
+        run: |
+          set -euo pipefail
+          test -f SECURITY.md
+          test -f ARCHITECTURE.md
+          test -f OPERATIONS.md
+          test -f RELEASE.md
+      - name: Check tracked tree for obvious secret files
+        run: |
+          set -euo pipefail
+          forbidden='(^|/)(\.env|\.env\.local|\.env\.production)$|\.(pem|key)$'
+          if git ls-files | grep -E "$forbidden"; then
+            echo 'Forbidden secret-bearing file tracked in governance repository.'
+            exit 1
+          fi
+          echo 'No obvious secret-bearing files tracked.'
