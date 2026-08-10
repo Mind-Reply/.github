@@ -1,0 +1,135 @@
+version: 1
+updated: 2026-08-11
+purpose: evidence-led automation map for the Mind-Reply / A11-K estate
+
+principle: automation may observe and validate by default; production mutation requires explicit authorization.
+
+agents:
+  - id: cartographer
+    owner: architecture
+    scope: all-three-territories
+    cadence: daily
+    mode: read-only
+    responsibilities:
+      - repository inventory
+      - dependency and deployment evidence collection
+      - stale/duplicate detection
+      - architecture evidence receipt
+    outputs:
+      - estate inventory
+      - repository graph deltas
+      - unknown-purpose queue
+
+  - id: security-guardian
+    owner: security
+    scope: all-active-repositories
+    cadence: every-push-and-daily
+    mode: read-only
+    responsibilities:
+      - secret-file guard
+      - dependency-risk checks
+      - public/private boundary checks
+      - security-policy drift detection
+    outputs:
+      - security findings
+      - remediation receipts
+    hard_rule: never print secret values
+
+  - id: reality-gate
+    owner: reliability
+    scope: canonical-products-and-control-plane
+    cadence: every-release-and-hourly
+    mode: read-only
+    responsibilities:
+      - DNS/TLS/HTTP probes where targets are configured
+      - critical-route checks
+      - health/API checks
+      - release SHA evidence
+    states:
+      - VERIFIED
+      - DEGRADED
+      - DOWN
+      - BLOCKED
+      - UNKNOWN
+
+  - id: release-guardian
+    owner: release-engineering
+    scope: production-repositories
+    cadence: every-pull-request
+    mode: validation-only
+    responsibilities:
+      - lint/typecheck/test/build
+      - secret scan
+      - artifact/release receipt
+      - deployment readiness gate
+    production_rule: failed critical checks block promotion
+
+  - id: recovery-guardian
+    owner: operations
+    scope: production
+    cadence: event-driven
+    mode: approval-gated
+    responsibilities:
+      - detect failed deployments
+      - prepare rollback plan
+      - verify rollback target
+      - collect post-recovery evidence
+    forbidden_without_authorization:
+      - production rollback
+      - secret changes
+      - DNS changes
+      - billing changes
+      - destructive data operations
+      - repository deletion
+
+  - id: commercial-journey
+    owner: product
+    scope: Mind-Reply commercial surface
+    cadence: every-release-and-hourly
+    mode: read-only
+    responsibilities:
+      - landing page
+      - CTA
+      - pricing/contact/checkout
+      - auth boundary
+      - core customer journey
+    rule: never claim conversion/payment success without provider confirmation
+
+  - id: command-guardian
+    owner: A11-K
+    scope: A11-K command boundary
+    cadence: every-command
+    mode: authorization-gated
+    lifecycle:
+      - INTENT
+      - PLAN
+      - PREVIEW
+      - RISK
+      - AUTHORIZATION
+      - EXECUTION
+      - VERIFICATION
+      - RECEIPT
+      - RETURN
+    rule: a command without a receipt is incomplete
+
+escalation:
+  P0: owner-immediate
+  P1: same-day
+  P2: scheduled
+  P3: backlog
+
+shared-evidence:
+  required:
+    - id
+    - operation
+    - target
+    - actor
+    - started_at
+    - completed_at
+    - result
+    - state
+    - next_action
+  prohibited:
+    - credentials
+    - access tokens
+    - unnecessary customer PII
