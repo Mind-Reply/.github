@@ -1,0 +1,59 @@
+name: Estate Discovery
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  discover:
+    if: ${{ vars.ESTATE_AUTOMATION_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Enumerate all three territories
+        env:
+          GH_TOKEN: ${{ secrets.ESTATE_GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p docs/estate/runs
+          python - <<'PY'
+          import json, os, subprocess, datetime
+          out = {
+            'checked_at': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            'territories': {}
+          }
+          def gh(args):
+            return json.loads(subprocess.check_output(['gh', *args], text=True))
+          for territory, mode in [('angellllkr-eng','user'),('Mind-Reply','org'),('A11-K','org')]:
+            if mode == 'user':
+              repos = gh(['api','/user/repos','--paginate','-H','Accept: application/vnd.github+json'])
+            else:
+              repos = gh(['api',f'/orgs/{territory}/repos?per_page=100','--paginate','-H','Accept: application/vnd.github+json'])
+            out['territories'][territory] = [
+              {
+                'name': r['name'], 'full_name': r['full_name'], 'private': r['private'],
+                'archived': r['archived'], 'default_branch': r.get('default_branch'),
+                'language': r.get('language'), 'updated_at': r.get('updated_at'),
+                'size_kb': r.get('size', 0), 'open_issues': r.get('open_issues_count', 0),
+                'fork': r.get('fork')
+              } for r in repos
+            ]
+          path='docs/estate/runs/discovery-latest.json'
+          open(path,'w').write(json.dumps(out, indent=2))
+          print(path)
+          PY
+      - name: Commit evidence
+        run: |
+          git config user.name 'estate-automation'
+          git config user.email 'estate-automation@users.noreply.github.com'
+          git add docs/estate/runs/discovery-latest.json
+          git diff --cached --quiet || git commit -m 'chore: refresh estate discovery evidence'
+          git push

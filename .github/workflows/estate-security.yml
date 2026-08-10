@@ -1,0 +1,45 @@
+name: Estate Security Guard
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 */6 * * *'
+
+permissions:
+  contents: read
+  security-events: read
+
+jobs:
+  security:
+    if: ${{ vars.ESTATE_AUTOMATION_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Scan tracked files and workflow permissions
+        env:
+          GH_TOKEN: ${{ secrets.ESTATE_GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p docs/estate/runs
+          python - <<'PY'
+          import json, os, subprocess, datetime, re
+          targets=['angellllkr-eng','Mind-Reply','A11-K']
+          findings=[]
+          def gh(args): return json.loads(subprocess.check_output(['gh',*args], text=True))
+          for owner in targets:
+            repos = gh(['api',f'/users/{owner}/repos?per_page=100']) if owner=='angellllkr-eng' else gh(['api',f'/orgs/{owner}/repos?per_page=100'])
+            for r in repos:
+              if r['archived']: continue
+              findings.append({'repository':r['full_name'],'status':'inventory-only','note':'Run repository-specific secret/history scanning before any production disposition.'})
+          report={'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'findings':findings,'secret_values':False}
+          open('docs/estate/runs/security-latest.json','w').write(json.dumps(report,indent=2))
+          PY
+      - name: Upload security evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: estate-security-report
+          path: docs/estate/runs/security-latest.json

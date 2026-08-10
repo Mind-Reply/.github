@@ -1,0 +1,163 @@
+version: 1
+name: github-estate-reconstruction
+owner: angellllkr-eng
+territories:
+  - angellllkr-eng
+  - Mind-Reply
+  - A11-K
+
+principles:
+  - evidence_before_claims
+  - no_unapproved_destructive_actions
+  - no_secret_values_in_artifacts
+  - bounded_repository_ownership
+  - every_mutation_has_a_receipt
+  - critical_failures_block_release
+
+agents:
+  discovery:
+    class: observer
+    scope: all_three_territories
+    schedule: "17 */6 * * *"
+    actions:
+      - enumerate_repositories
+      - inspect_metadata
+      - inspect_workflows
+      - build_repository_graph
+      - detect_duplicate_names_and_purposes
+    mutation: none
+    output: docs/estate/discovery.json
+
+  security:
+    class: security_guard
+    scope: all_three_territories
+    schedule: "37 */6 * * *"
+    actions:
+      - detect_tracked_secret_files
+      - scan_workflow_permissions
+      - inspect_secret_references
+      - identify_historical_exposure_candidates
+      - classify_rotation_required
+    mutation: report_only
+    output: docs/estate/security.json
+
+  reality:
+    class: verifier
+    scope: canonical_products_and_command_systems
+    schedule: "7 * * * *"
+    actions:
+      - dns
+      - tls
+      - http
+      - redirects
+      - critical_routes
+      - api_health
+      - release_sha
+      - auth_boundary
+      - critical_cta
+      - checkout_when_configured
+    mutation: none
+    output: docs/estate/reality.json
+
+  release:
+    class: release_guard
+    scope: production_repositories
+    trigger: pull_request_and_deployment
+    actions:
+      - lint
+      - typecheck
+      - unit_tests
+      - build
+      - secret_scan
+      - preview
+      - reality_gate
+      - post_deploy_probe
+      - emit_release_receipt
+    mutation: guarded
+    production_approval: required
+
+  governance:
+    class: policy_guard
+    scope: organizations
+    schedule: "47 3 * * 1"
+    actions:
+      - branch_protection
+      - codeowners
+      - required_checks
+      - security_policy
+      - issue_pr_templates
+      - actions_permissions
+      - environment_protection
+    mutation: report_then_pr
+    output: docs/estate/governance.json
+
+  commercial:
+    class: journey_verifier
+    scope: Mind-Reply
+    schedule: "27 */6 * * *"
+    actions:
+      - landing_page
+      - value_proposition
+      - cta
+      - contact_or_checkout
+      - authentication
+      - core_product
+      - delivery
+      - error_handling
+    mutation: none
+    output: docs/estate/commercial.json
+
+  evidence:
+    class: recorder
+    scope: all_automation
+    trigger: every_automation_run
+    actions:
+      - timestamp
+      - actor
+      - target
+      - operation
+      - inputs_hash
+      - result
+      - state
+      - artifacts
+      - next_action
+    mutation: append_only
+    output: evidence/release-receipts/
+
+  owner_gate:
+    class: authorization_guard
+    scope: critical_actions
+    actions:
+      - production_mutation
+      - secret_change
+      - billing_change
+      - dns_change
+      - destructive_database_change
+      - repository_delete
+      - organization_permission_change
+    mutation: approval_required
+    required_fields:
+      - owner
+      - reason
+      - target
+      - rollback
+      - verification_plan
+
+routing:
+  p0: security,reality,release
+  p1: discovery,governance,commercial,evidence
+  critical: owner_gate
+
+states:
+  - PLANNED
+  - IMPLEMENTED
+  - BUILT
+  - PREVIEW
+  - VERIFIED
+  - PRODUCTION
+  - DEGRADED
+  - DOWN
+  - BLOCKED
+  - STALE
+  - UNKNOWN
+  - RECOVERING
