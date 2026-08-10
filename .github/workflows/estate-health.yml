@@ -1,0 +1,21 @@
+name: Estate Health
+
+on:
+  schedule:
+    - cron: '47 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reality-state guard
+        run: |
+          set -euo pipefail
+          echo "agent=reality-gate"
+          echo "state=READ_ONLY"
+          echo "A real external probe requires an approved target URL in repository variables."
+          echo "This baseline deliberately does not guess domains or claim production health."

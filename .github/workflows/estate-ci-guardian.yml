@@ -1,0 +1,23 @@
+name: CI Guardian
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '7 * * * *'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  policy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Define safe automation boundary
+        run: |
+          set -euo pipefail
+          echo "agent=ci-guardian"
+          echo "authority=LOW"
+          echo "Automatic merges are prohibited."
+          echo "Production mutation is prohibited."
+          echo "Failed checks should result in an issue/PR for review, not silent mutation."
