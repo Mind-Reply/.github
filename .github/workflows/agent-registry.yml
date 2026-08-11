@@ -1,0 +1,31 @@
+name: Validate Estate Agent Registry
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '11 2 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate registry exists
+        run: test -s agents/ESTATE_AGENTS.yaml
+      - name: Validate required roles
+        run: |
+          set -euo pipefail
+          for role in cartographer security-guardian ci-operator reality-gate release-guardian dependency-steward evidence-keeper recovery-operator commercial-sentinel architecture-warden; do
+            grep -q "^  $role:" agents/ESTATE_AGENTS.yaml
+          done
+      - name: Validate safety policy
+        run: |
+          set -euo pipefail
+          grep -q 'unknown_state_is_healthy: false' agents/ESTATE_AGENTS.yaml
+          grep -q 'production_deploy: protected_environment_required' agents/ESTATE_AGENTS.yaml
+          grep -q 'critical_action: owner_approval_required' agents/ESTATE_AGENTS.yaml || true
