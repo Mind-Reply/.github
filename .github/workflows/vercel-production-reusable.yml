@@ -1,0 +1,51 @@
+name: Reusable Vercel Production Deploy
+
+on:
+  workflow_call:
+    inputs:
+      project-name:
+        required: true
+        type: string
+      node-version:
+        required: false
+        default: '20'
+        type: string
+    secrets:
+      VERCEL_TOKEN:
+        required: true
+      VERCEL_ORG_ID:
+        required: true
+      VERCEL_PROJECT_ID:
+        required: true
+
+permissions:
+  contents: read
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '9.15.9'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+      - name: Install
+        run: pnpm install --no-frozen-lockfile
+      - name: Build
+        run: pnpm build
+      - name: Install Vercel CLI
+        run: pnpm add --global vercel@latest
+      - name: Deploy production
+        run: vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN"
+      - name: Record release receipt
+        run: |
+          printf 'project=%s\ncommit=%s\nenvironment=production\n' '${{ inputs.project-name }}' "$GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"

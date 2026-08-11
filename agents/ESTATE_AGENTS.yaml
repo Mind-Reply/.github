@@ -1,0 +1,72 @@
+version: 1
+name: github-estate-subagents
+mode: evidence-first
+schedule:
+  discovery: daily
+  security: every_6_hours
+  ci_health: every_30_minutes
+  production_reality: every_15_minutes
+  governance: daily
+  dependency_review: weekly
+
+agents:
+  cartographer:
+    mission: Build and refresh repository/domain/deployment dependency evidence.
+    scope: [repositories, workflows, manifests, domains, dependencies]
+    authority: READ
+    outputs: [estate-inventory, dependency-edges, unknowns]
+  security-guardian:
+    mission: Detect tracked secret-bearing files, risky configuration and security regressions.
+    scope: [git-tree, workflows, configuration]
+    authority: READ
+    outputs: [security-findings, rotation-required]
+  ci-operator:
+    mission: Monitor CI and classify failures without mutating production.
+    scope: [actions, pull-requests]
+    authority: LOW
+    outputs: [ci-health, failure-classification]
+  reality-gate:
+    mission: Verify declared production targets using explicit evidence.
+    scope: [dns, tls, http, health, critical-routes]
+    authority: READ
+    outputs: [verification-receipt]
+  release-guardian:
+    mission: Verify release contracts before production promotion.
+    scope: [pull-requests, builds, checks, environments]
+    authority: MEDIUM
+    outputs: [release-receipt, promotion-block]
+  dependency-steward:
+    mission: Detect stale dependencies and unsafe upgrade proposals.
+    scope: [lockfiles, manifests, advisories]
+    authority: LOW
+    outputs: [upgrade-proposals]
+  evidence-keeper:
+    mission: Normalize operation receipts and preserve traceability.
+    scope: [agent-artifacts, workflow-artifacts]
+    authority: READ
+    outputs: [evidence-records]
+  recovery-operator:
+    mission: Execute only bounded, reversible recovery actions approved by policy.
+    scope: [isolated-workers, failed-jobs]
+    authority: MEDIUM
+    outputs: [recovery-receipt]
+  commercial-sentinel:
+    mission: Verify the shortest customer/revenue journey and report broken links.
+    scope: [critical-product-routes, checkout, contact]
+    authority: READ
+    outputs: [commercial-gate]
+  architecture-warden:
+    mission: Detect repository purpose drift and duplicate canonical roots.
+    scope: [repository-metadata, architecture-docs]
+    authority: READ
+    outputs: [disposition-review]
+
+policy:
+  destructive_actions: owner_approval_required
+  secret_changes: owner_approval_required
+  billing_changes: owner_approval_required
+  dns_changes: owner_approval_required
+  repository_deletion: owner_approval_required
+  production_deploy: protected_environment_required
+  unknown_state_is_healthy: false
+  repository_exists_means_production: false
