@@ -1,0 +1,43 @@
+name: Estate Reality Gate
+
+on:
+  workflow_call:
+    inputs:
+      target_url:
+        required: true
+        type: string
+      expected_paths:
+        required: false
+        type: string
+        default: "/"
+  workflow_dispatch:
+    inputs:
+      target_url:
+        required: true
+        type: string
+      expected_paths:
+        required: false
+        type: string
+        default: "/"
+
+permissions:
+  contents: read
+
+jobs:
+  reality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Probe DNS/TLS/HTTP and critical routes
+        shell: bash
+        env:
+          TARGET_URL: ${{ inputs.target_url }}
+          EXPECTED_PATHS: ${{ inputs.expected_paths }}
+        run: |
+          set -euo pipefail
+          test -n "$TARGET_URL"
+          curl --fail --silent --show-error --location --max-time 20 -o /dev/null -w 'HTTP=%{http_code}\n' "$TARGET_URL"
+          for path in $EXPECTED_PATHS; do
+            curl --fail --silent --show-error --location --max-time 20 -o /dev/null -w "$path HTTP=%{http_code}\n" "${TARGET_URL%/}${path}"
+          done
+          echo "REALITY_GATE=VERIFIED"
