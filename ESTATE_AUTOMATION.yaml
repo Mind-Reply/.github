@@ -1,0 +1,61 @@
+version: 1
+status: proposed-and-safe
+principle: evidence-first, non-destructive-by-default
+
+subagents:
+  cartographer:
+    scope: repository-inventory-and-dependency-graph
+    actions: [read]
+    schedule: hourly
+  security:
+    scope: secret-patterns-history-and-permission-audit
+    actions: [read, report]
+    schedule: hourly
+    escalation: P0-on-credible-exposure
+  ci-guardian:
+    scope: lint-typecheck-test-build-workflow-health
+    actions: [read, rerun-failed-job]
+    schedule: on-push-and-hourly
+  reality-gate:
+    scope: dns-tls-http-routes-auth-api-checkout-production-evidence
+    actions: [read, report]
+    schedule: hourly
+    missing-evidence-state: UNKNOWN
+  release-guardian:
+    scope: release-receipts-preview-production-verification
+    actions: [read, propose]
+    production_mutation: approval-required
+  integration-guardian:
+    scope: github-vercel-supabase-neon-stripe-cloudflare-n8n-provider-health
+    actions: [read, report]
+    schedule: hourly
+  dependency-guardian:
+    scope: package-lockfiles-framework-security-updates
+    actions: [read, propose]
+    production_mutation: approval-required
+  commercial-journey:
+    scope: landing-cta-auth-checkout-onboarding-delivery
+    actions: [read, report]
+    schedule: every-30-minutes
+  recovery:
+    scope: bounded-low-risk-recovery-and-rollback-readiness
+    actions: [read, propose]
+    production_mutation: approval-required
+  archivist:
+    scope: duplicate-and-stale-repository-analysis
+    actions: [read, propose]
+    destructive_actions: forbidden
+
+control_rules:
+  - repository-exists-is-not-production
+  - no-secret-values-in-receipts
+  - no-unapproved-production-mutation
+  - no-delete-or-archive-without-owner-approval
+  - every-operation-emits-evidence
+  - critical-failure-blocks-promotion
+
+escalation:
+  P0: security-exposure-or-production-integrity-risk
+  P1: release-or-customer-path-blocker
+  P2: architecture-or-operational-debt
+  P3: cleanup-and-documentation
