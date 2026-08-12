@@ -1,0 +1,41 @@
+name: Estate Weekly Architecture Review
+
+on:
+  schedule:
+    - cron: '37 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Weekly architecture checkpoint
+        run: |
+          set -euo pipefail
+          cat <<'EOF'
+          WEEKLY SUBAGENTS
+          - Architecture Judge
+          - Integration Auditor
+          - Data Safety
+          - Performance Scout
+          - Cost Scout
+          - Governance Keeper
+          - Third-Party Curator
+          - Migration Planner
+          - Recovery Engineer
+
+          Required output: evidence, confidence, state, action, risk, reversibility, approval requirement.
+          Unknown remains UNKNOWN. No destructive action is authorized by this workflow.
+          EOF
+      - name: Create review issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `Weekly architecture review ${new Date().toISOString().slice(0,10)}`;
+            const body = 'Run the bounded subagent registry against all three territories. Attach evidence and receipts. Do not delete, transfer, rotate secrets, change DNS, billing, or production permissions without owner approval.';
+            await github.rest.issues.create({owner: context.repo.owner, repo: context.repo.repo, title, body, labels: []});
