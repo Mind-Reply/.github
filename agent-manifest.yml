@@ -1,0 +1,37 @@
+version: 1
+system: github-estate-ops
+agents:
+  - id: cartographer
+    file: agents/estate-cartographer.md
+    schedule: '17 */6 * * *'
+    mode: read-only
+  - id: security-sentinel
+    file: agents/security-sentinel.md
+    schedule: '37 */4 * * *'
+    mode: report-first
+  - id: release-guardian
+    file: agents/release-guardian.md
+    schedule: '7 * * * *'
+    mode: gate
+  - id: reality-gate
+    file: agents/reality-gate.md
+    schedule: '13 * * * *'
+    mode: verify-only
+  - id: commercial-operator
+    file: agents/commercial-operator.md
+    schedule: '47 */6 * * *'
+    mode: report-first
+  - id: a11k-commander
+    file: agents/a11k-commander.md
+    schedule: '3 */2 * * *'
+    mode: approval-first
+
+rules:
+  production_mutation: owner-approval
+  secret_change: owner-approval
+  destructive_action: owner-approval
+  repository_delete: owner-approval
+  billing_change: owner-approval
+  dns_change: owner-approval
+  unknown_state: investigate
+  missing_evidence: unknown
