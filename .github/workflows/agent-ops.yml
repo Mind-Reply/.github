@@ -1,0 +1,54 @@
+name: Estate Agent Operations
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+    - cron: '37 */4 * * *'
+    - cron: '7 * * * *'
+    - cron: '13 * * * *'
+    - cron: '47 */6 * * *'
+    - cron: '3 */2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: estate-agent-ops
+  cancel-in-progress: false
+
+jobs:
+  agent-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate agent manifest
+        run: |
+          set -euo pipefail
+          test -f agent-manifest.yml
+          for f in agents/estate-cartographer.md agents/security-sentinel.md agents/release-guardian.md agents/reality-gate.md agents/commercial-operator.md agents/a11k-commander.md; do
+            test -f "$f"
+          done
+          echo "All six agent contracts are present."
+      - name: Scope check for estate token
+        env:
+          GH_TOKEN: ${{ secrets.ESTATE_GITHUB_TOKEN || github.token }}
+        run: |
+          set -euo pipefail
+          echo "Checking GitHub API scope without printing credentials."
+          gh api user --jq '.login'
+          echo "Mind-Reply repository visibility available to this automation:"
+          gh api 'orgs/Mind-Reply/repos?per_page=100' --jq '.[].full_name' | sort | head -100 || true
+          echo "A11-K repository visibility available to this automation:"
+          gh api 'orgs/A11-K/repos?per_page=100' --jq '.[].full_name' | sort | head -100 || true
+      - name: Emit safe heartbeat
+        run: |
+          printf '{"system":"github-estate-ops","agents":6,"checked_at":"%s","state":"RUNNING","mutation_policy":"approval-first"}\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > agent-heartbeat.json
+          cat agent-heartbeat.json
+      - name: Upload heartbeat
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-heartbeat-${{ github.run_id }}
+          path: agent-heartbeat.json
