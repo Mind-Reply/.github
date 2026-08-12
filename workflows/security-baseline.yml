@@ -1,0 +1,47 @@
+name: Security Baseline
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  schedule:
+    - cron: '41 2 * * *'
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Secret-pattern guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          forbidden='(^|/)(\.env|\.env\.local|\.env\.production)$|\.(pem|key)$'
+          if git ls-files -z | tr '\0' '\n' | grep -E "$forbidden"; then
+            echo 'Tracked secret-bearing file detected.'
+            exit 1
+          fi
+      - name: Dependency audit where supported
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f pnpm-lock.yaml ]; then
+            corepack enable
+            pnpm install --frozen-lockfile
+            pnpm audit --audit-level high || true
+          elif [ -f package-lock.json ]; then
+            npm ci
+            npm audit --audit-level=high || true
+          elif [ -f yarn.lock ]; then
+            corepack enable
+            yarn install --immutable
+            yarn npm audit --severity high || true
+          else
+            echo 'No supported JS lockfile found; dependency audit requires repository-specific setup.'
+          fi
