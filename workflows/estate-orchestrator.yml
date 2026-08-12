@@ -1,0 +1,90 @@
+name: Estate Orchestrator
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 1 * * *'
+
+permissions:
+  contents: read
+  actions: read
+  issues: read
+  pull-requests: read
+
+jobs:
+  validate-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate automation manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s automation/estate-agents.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('automation/estate-agents.json')
+          d = json.loads(p.read_text())
+          assert d['version']
+          assert len(d['agents']) >= 10
+          assert len(d['territories']) == 3
+          for a in d['agents']:
+              assert a['id'] and a['mission']
+          print(f"validated {len(d['agents'])} agents across {len(d['territories'])} territories")
+          PY
+
+  safe-observation:
+    needs: validate-manifest
+    strategy:
+      fail-fast: false
+      matrix:
+        agent:
+          - estate-cartographer
+          - dependency-graph
+          - security-sentinel
+          - canonicality-architect
+          - governance-guardian
+          - pr-triage
+          - issue-triage
+          - production-reality-gate
+          - release-guardian
+          - mindreply-commercial
+          - a11k-command-guardian
+          - integration-sentinel
+          - cost-performance
+          - recovery-operator
+          - evidence-recorder
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Register scheduled agent run
+        env:
+          AGENT: ${{ matrix.agent }}
+        run: |
+          echo "agent=$AGENT"
+          echo "mode=evidence-first"
+          echo "mutation=policy-controlled"
+          echo "No autonomous destructive mutation is permitted by this workflow."
+
+  daily-receipt:
+    needs: safe-observation
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Emit orchestration receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .automation
+          cat > .automation/orchestration-receipt.json <<'JSON'
+          {
+            "operation": "estate-orchestration",
+            "state": "OBSERVED",
+            "policy": "evidence-first",
+            "destructive_actions": "disabled",
+            "next_action": "run repository-specific agents through approved connectors/runners"
+          }
+          JSON
+          cat .automation/orchestration-receipt.json
