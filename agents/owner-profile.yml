@@ -1,0 +1,54 @@
+version: 1
+owner:
+  handle: angellllkr-eng
+  preferred_name: Angel
+  operating_mode: evidence-first
+  response_preference: concise
+
+constraints:
+  - no blind merges
+  - no blind deletes
+  - no competing cores
+  - no production claim without evidence
+  - no secrets in Git
+  - no uncontrolled production mutation
+  - preserve valuable legacy assets before archive
+  - prefer canonical domains where appropriate
+  - prioritize revenue and customer outcomes
+  - keep prototypes free-tier/self-hostable where practical
+
+architecture:
+  commercial: Mind-Reply
+  command_intelligence: A11-K
+  development_estate: angellllkr-eng
+
+priority_order:
+  - security
+  - production_truth
+  - customer_journey
+  - revenue
+  - reliability
+  - architecture
+  - governance
+  - performance
+  - cost
+  - expansion
+
+approval_levels:
+  READ: automatic
+  LOW: automatic_if_reversible
+  MEDIUM: policy_dependent
+  HIGH: owner_approval
+  CRITICAL: owner_approval_plus_verification_plus_rollback
+
+success_definition:
+  - right_code
+  - right_org
+  - right_repository
+  - right_boundary
+  - right_credentials
+  - right_environment
+  - verified_evidence
+  - observability
+  - recovery
+  - customer_or_business_outcome
