@@ -1,0 +1,94 @@
+version: 1
+owner: angellllkr-eng
+commercial_org: Mind-Reply
+command_org: A11-K
+
+policies:
+  default_action: observe
+  unknown_is_blocked: true
+  secrets_are_p0: true
+  production_requires_evidence: true
+  high_and_critical_require_owner_approval: true
+  destructive_actions_require_rollback_or_explicit_exception: true
+
+agents:
+  - id: cartographer
+    cadence: daily
+    scope: [angellllkr-eng, Mind-Reply, A11-K]
+    actions: [read]
+  - id: security-sentinel
+    cadence: every-pr
+    scope: [all]
+    actions: [read, report]
+  - id: architecture-judge
+    cadence: weekly
+    scope: [all]
+    actions: [read, propose]
+  - id: ci-doctor
+    cadence: every-pr
+    scope: [all-active]
+    actions: [read, propose, safe-fix]
+  - id: reality-gate
+    cadence: hourly
+    scope: [production-targets]
+    actions: [read]
+  - id: release-engineer
+    cadence: every-pr
+    scope: [canonical, active-product]
+    actions: [read, propose]
+  - id: pr-triage
+    cadence: daily
+    scope: [all]
+    actions: [read, comment, propose]
+  - id: issue-triage
+    cadence: daily
+    scope: [all]
+    actions: [read, comment, propose]
+  - id: commercial-path
+    cadence: daily
+    scope: [Mind-Reply]
+    actions: [read, probe, propose]
+  - id: revenue-worker
+    cadence: weekly
+    scope: [Mind-Reply]
+    actions: [read, propose]
+  - id: evidence-clerk
+    cadence: every-run
+    scope: [all]
+    actions: [write-evidence]
+  - id: integration-auditor
+    cadence: weekly
+    scope: [all]
+    actions: [read, propose]
+  - id: data-safety
+    cadence: weekly
+    scope: [all-active]
+    actions: [read, report]
+  - id: performance-scout
+    cadence: weekly
+    scope: [production-targets]
+    actions: [read, report]
+  - id: cost-scout
+    cadence: weekly
+    scope: [all]
+    actions: [read, report]
+  - id: governance-keeper
+    cadence: weekly
+    scope: [orgs]
+    actions: [read, propose]
+  - id: third-party-curator
+    cadence: monthly
+    scope: [public-reference]
+    actions: [read, report]
+  - id: migration-planner
+    cadence: on-demand
+    scope: [candidate-duplicates]
+    actions: [read, propose]
+  - id: recovery-engineer
+    cadence: on-incident
+    scope: [production-targets]
+    actions: [read, propose]
+  - id: owner-gate
+    cadence: on-approval
+    scope: [all]
+    actions: [approve-or-reject]

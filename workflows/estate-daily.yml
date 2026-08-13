@@ -1,0 +1,40 @@
+name: Estate Daily Orchestrator
+
+on:
+  schedule:
+    - cron: '11 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Record daily orchestration contract
+        run: |
+          set -euo pipefail
+          echo 'Daily estate run: cartographer, security-sentinel, pr-triage, issue-triage, commercial-path, evidence-clerk'
+          echo 'High/critical mutations remain approval-gated.'
+      - name: Create operator issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `Estate daily run ${new Date().toISOString().slice(0,10)}`;
+            const body = [
+              'Automated operator checkpoint.',
+              '',
+              '- Cartographer: inventory drift',
+              '- Security Sentinel: P0 exposure signals',
+              '- PR Triage: stale/high-value PRs',
+              '- Issue Triage: P0/P1 blockers',
+              '- Commercial Path: customer journey evidence',
+              '- Evidence Clerk: receipt required',
+              '',
+              'No production mutation is authorized by this issue.'
+            ].join('\\n');
+            await github.rest.issues.create({owner: context.repo.owner, repo: context.repo.repo, title, body, labels: []});

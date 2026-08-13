@@ -1,0 +1,30 @@
+name: Estate Hourly Reality Gate
+
+on:
+  schedule:
+    - cron: '23 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check configured production targets
+        env:
+          PRODUCTION_TARGETS: ${{ vars.PRODUCTION_TARGETS }}
+        run: |
+          set -euo pipefail
+          if [ -z "${PRODUCTION_TARGETS:-}" ]; then
+            echo 'No production targets configured; state=UNKNOWN.'
+            exit 0
+          fi
+          while IFS= read -r target; do
+            [ -z "$target" ] && continue
+            echo "Checking $target"
+            curl --fail --silent --show-error --location --max-time 15 "$target" >/dev/null
+            echo "VERIFIED_HTTP $target"
+          done <<< "$PRODUCTION_TARGETS"
