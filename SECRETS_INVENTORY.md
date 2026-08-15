@@ -16,6 +16,8 @@ Aligned with: SECURITY.md + ESTATE.yaml (`no_secret_values_in_git`, `never print
 | `STRIPE_SECRET_KEY` | Billing | Vercel env (server-only) / GitHub secret | Billing flows |
 | `STRIPE_WEBHOOK_SECRET` | Webhook verification | Vercel env / GitHub secret | Webhook handlers |
 | `GITHUB_TOKEN` / fine-grained PAT | CI, org automation | GitHub Actions (built-in or org secret) | Steward workflows |
+| `XAI_API_KEY` / model keys | Inference | Vercel env or GitHub Org secret | Agents / engines |
+| `TWILIO_*` (if used) | SMS / voice | Vercel env (server-only) | am-service-ads-engine |
 | `CLOUDFLARE_*` | Pages / DNS if used | Cloudflare dashboard + GitHub secret if needed | Aurel / static deploys |
 
 ## Placement rules
