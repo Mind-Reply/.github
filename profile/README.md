@@ -1,76 +1,71 @@
-# Mind-Reply
+﻿# Mind-Reply
 
-> Independent software workshop. Owned and operated by **Angel L. Krastev** (Sofia, Bulgaria). Sole-owner incorporation: **София Тех Регистър EOOD** (Sofia Tech Register EOOD).
+> Independent software workshop. Owned and operated by **Angel L. Krastev** (Sofia, Bulgaria). Sole-owner incorporation: Sofia Tech Register EOOD.
 
-## Live products
-
-Every product below is deployed and verified. The hub at [mind-reply.github.io/angellllkr-eng.github.io](https://mind-reply.github.io/angellllkr-eng.github.io/) links them all.
+## Live products — 22 verified URLs (22 Aug 2026)
 
 ### Platforms (Vercel)
 
-| Product | URL | Repo | What it does |
-|---|---|---|---|
-| **ResellerPro** | [reseller-pro.vercel.app](https://reseller-pro.vercel.app) | `resellerpro-platform-original` | Domain, hosting, billing, project, support & operations platform |
-| **Aether-X** | [aether-x.vercel.app](https://aether-x.vercel.app) | — | Advanced systems panel |
-| **Kratos-S** | [kratos-s.vercel.app](https://kratos-s.vercel.app) | — | Echelon Nexus — logistics & physics workspace |
-| **MindReply** | [mindreply.vercel.app](https://mindreply.vercel.app) | `mindreply-org-site` | Core product infrastructure |
-| **TapCraft** | [tapcraft.vercel.app](https://tapcraft.vercel.app) | — | Custom 3D NFC printing (Melbourne) |
-| **RouteForge** | [routeforge.vercel.app](https://routeforge.vercel.app) | — | Access & routing platform |
-| **AM Service Ads** | [am-service-ads-engine.vercel.app](https://am-service-ads-engine.vercel.app) | `am-service-ads-engine` | Truck parts & fleet service campaigns |
+| Product | URL | Repo |
+|---|---|---|
+| ResellerPro | [reseller-pro.vercel.app](https://reseller-pro.vercel.app) | [`Mind-Reply/resellerpro`](https://github.com/Mind-Reply/resellerpro) |
+| Aether-X | [aether-x.vercel.app](https://aether-x.vercel.app) | [`Mind-Reply/aether-x`](https://github.com/Mind-Reply/aether-x) |
+| Kratos-S | [kratos-s.vercel.app](https://kratos-s.vercel.app) | [`Mind-Reply/kratos-s`](https://github.com/Mind-Reply/kratos-s) |
+| MindReply | [mindreply.vercel.app](https://mindreply.vercel.app) | [`Mind-Reply/mindreply-app`](https://github.com/Mind-Reply/mindreply-app) |
+| TapCraft | [tapcraft.vercel.app](https://tapcraft.vercel.app) | [`Mind-Reply/tapcraft`](https://github.com/Mind-Reply/tapcraft) |
+| RouteForge | [routeforge.vercel.app](https://routeforge.vercel.app) | [`Mind-Reply/routeforge`](https://github.com/Mind-Reply/routeforge) |
+| AM Service Ads | [am-service-ads-engine.vercel.app](https://am-service-ads-engine.vercel.app) | [`Mind-Reply/am-service-ads-engine`](https://github.com/Mind-Reply/am-service-ads-engine) |
 
-### Nova commerce storefronts (within ResellerPro)
+### Nova storefronts (within ResellerPro)
 
-| Storefront | URL |
-|---|---|
-| CarrySignal | [reseller-pro.vercel.app/nova/carrysignal.html](https://reseller-pro.vercel.app/nova/carrysignal.html) |
-| SignalCard | [reseller-pro.vercel.app/nova/signalcard.html](https://reseller-pro.vercel.app/nova/signalcard.html) |
-| SignalDesk | [reseller-pro.vercel.app/nova/signaldesk.html](https://reseller-pro.vercel.app/nova/signaldesk.html) |
-| SignalSupply | [reseller-pro.vercel.app/nova/signalsupply.html](https://reseller-pro.vercel.app/nova/signalsupply.html) |
+[CarrySignal](https://reseller-pro.vercel.app/nova/carrysignal.html) · [SignalCard](https://reseller-pro.vercel.app/nova/signalcard.html) · [SignalDesk](https://reseller-pro.vercel.app/nova/signaldesk.html) · [SignalSupply](https://reseller-pro.vercel.app/nova/signalsupply.html)
 
-### GitHub Pages sites
+### GitHub Pages
 
 | Site | URL | Repo |
 |---|---|---|
-| **Sofia Tech Ledger** | [mind-reply.github.io/A11-K](https://mind-reply.github.io/A11-K/) | `Mind-Reply/A11-K` |
-| **A11K Ops Center** | […/ops-center](https://mind-reply.github.io/angellllkr-eng.github.io/ops-center/) | `Mind-Reply/angellllkr-eng.github.io` |
-| **A11K Security Gateway** | […/security-gateway](https://mind-reply.github.io/angellllkr-eng.github.io/security-gateway/) | `Mind-Reply/angellllkr-eng.github.io` |
-| **Financial Momentum Ledger** | […/momentum-ledger](https://mind-reply.github.io/angellllkr-eng.github.io/momentum-ledger/) | `Mind-Reply/angellllkr-eng.github.io` |
+| Sofia Tech Ledger | [mind-reply.github.io/A11-K](https://mind-reply.github.io/A11-K/) | [`Mind-Reply/A11-K`](https://github.com/Mind-Reply/A11-K) |
+| Public Hub | [mind-reply.github.io/angellllkr-eng.github.io](https://mind-reply.github.io/angellllkr-eng.github.io/) | [`Mind-Reply/angellllkr-eng.github.io`](https://github.com/Mind-Reply/angellllkr-eng.github.io) |
+| A11K Ops Center | […/ops-center](https://mind-reply.github.io/angellllkr-eng.github.io/ops-center/) | (subdirectory of hub) |
+| A11K Security Gateway | […/security-gateway](https://mind-reply.github.io/angellllkr-eng.github.io/security-gateway/) | (subdirectory of hub) |
+| Financial Momentum Ledger | […/momentum-ledger](https://mind-reply.github.io/angellllkr-eng.github.io/momentum-ledger/) | (subdirectory of hub) |
 
 ### Payment
 
-| Link | Mode | URL |
-|---|---|---|
-| Stripe checkout | test | [buy.stripe.com/00w9ANbQYfgkcyk3Gq63K07](https://buy.stripe.com/00w9ANbQYfgkcyk3Gq63K07) |
+| Link | URL |
+|---|---|
+| Stripe checkout (test) | [buy.stripe.com/00w9ANbQYfgkcyk3Gq63K07](https://buy.stripe.com/00w9ANbQYfgkcyk3Gq63K07) |
 
 ---
 
-## Repository structure
+## Repository structure — One product = one repo
 
-### Active original repos
+### Active repos (13)
 
 | Repo | Purpose |
 |---|---|
-| `A11-K` | Sofia Tech Ledger — official site, NIS2 compliance, founder page, announcements |
+| `A11-K` | Sofia Tech Ledger — official site, NIS2, founder, announcements |
 | `angellllkr-eng.github.io` | Public hub — all deployments linked, sub-sites hosted |
-| `mindreply-org-site` | MindReply core product site |
-| `.github` | Org profile, standards, automation, architecture docs |
-| `own-core` | Templates, security guides, ownership layer |
-| `Aurel` | Connectivity platform |
+| `resellerpro` | ResellerPro — domain/hosting/billing/ops platform |
+| `aether-x` | Aether-X — advanced systems panel |
+| `kratos-s` | Kratos-S — Echelon Nexus logistics workspace |
+| `mindreply-app` | MindReply — core product infrastructure |
+| `tapcraft` | TapCraft — custom 3D NFC printing |
+| `routeforge` | RouteForge — access and routing platform |
 | `am-service-ads-engine` | AM Service — truck parts & fleet campaigns |
+| `mindreply-org-site` | MindReply org site |
+| `.github` | Org profile, standards, automation |
+| `own-core` | Templates, security guides |
+| `Aurel` | Connectivity platform |
 
 ### Personal repos (angellllkr-eng)
 
 | Repo | Purpose |
 |---|---|
-| `angellllkr-eng` | Profile README |
-| `mind-reply-core` | Canonical monorepo — unified platform + branded surfaces |
-| `enterprise-engine-radar` | LLMOps & governance platform intelligence |
-| `burning-heart-launcher` | Personal fan page (EGT slot demos) |
+| `mind-reply-core` | Canonical monorepo |
+| `enterprise-engine-radar` | LLMOps & governance intelligence |
+| `burning-heart-launcher` | Personal fan page |
 | `NEW-SIGNAL-check` | A11 signal verification |
-
-### Archived / forks (reference only)
-
-12 archived repos and 11 forks are retained for reference but are not active. They can be cleaned up in a future pass.
 
 ---
 
@@ -80,14 +75,13 @@ Every product below is deployed and verified. The hub at [mind-reply.github.io/a
 2. **Evidence over decoration.** Every deployment is HTTP-verified.
 3. **Reversible by default.** Important actions have checkpoints.
 4. **No silent mutation.** Automation is inspectable.
-5. **Search visibility earned** through useful language and structured content.
-6. **Secrets stay local.** Never committed, never exposed.
-7. **Each product has its own voice** — no SaaS template cloning.
+5. **Secrets stay local.** Never committed, never exposed.
+6. **Each product has its own voice.**
 
 ## Contact
 
 - **Owner:** Angel L. Krastev (10Apr97)
-- **Entity:** София Тех Регистър EOOD
+- **Entity:** Sofia Tech Register EOOD
 - **GitHub:** [github.com/Mind-Reply](https://github.com/Mind-Reply) · [github.com/angellllkr-eng](https://github.com/angellllkr-eng)
 - **Web:** [mind-reply.com](https://mind-reply.com)
 
