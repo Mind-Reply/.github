@@ -23,7 +23,7 @@ Internal system names such as Crownline, Proofline, Nowline and Control Plane ar
 | A11-K | [Mind-Reply/A11-K](https://github.com/Mind-Reply/A11-K) |
 | Aurel | [Mind-Reply/Aurel](https://github.com/Mind-Reply/Aurel) |
 | ResellerPro | [angellllkr-eng/resellerpro-platform](https://github.com/angellllkr-eng/resellerpro-platform) |
-| PatchTalk | [angellllkr-eng/patchtalk](https://github.com/angellllkr-eng/patchtalk) |
+| PatchTalk | [Mind-Reply/whatsapp-ai-router](https://github.com/Mind-Reply/whatsapp-ai-router) |
 
 ## Naming rule
 
