@@ -10,7 +10,7 @@ Policy: one functionally distinct product or system = one canonical repository.
 
 | Repository | Role | Disposition |
 |---|---|---|
-| `Mind-Reply/mindreply` | MindReply production/application root | CANONICAL |
+| `Mind-Reply/mindreply-app` | MindReply production/application root | CANONICAL |
 | `Mind-Reply/mind-reply-core` | MindReply core/runtime | REVIEW — overlaps personal `mind-reply-core` |
 | `Mind-Reply/mind-reply-app` | MindReply app | REVIEW — inspect before consolidation |
 | `Mind-Reply/control-plane` | Operational control plane | CANONICAL CANDIDATE |
@@ -25,8 +25,8 @@ Policy: one functionally distinct product or system = one canonical repository.
 | `Mind-Reply/Aurel` | Aurel | CANONICAL CANDIDATE |
 | `Mind-Reply/A11-K` | Public A11-K surface | CANONICAL |
 | `Mind-Reply/angellllkr-eng.github.io` | Public hub | CANONICAL |
-| `Mind-Reply/mindreply-docs` | Documentation | CANONICAL |
-| `Mind-Reply/mindreply-brands` | Brand registry/assets | REVIEW |
+| `Mind-Reply/mindreply-app-docs` | Documentation | CANONICAL |
+| `Mind-Reply/mindreply-app-brands` | Brand registry/assets | REVIEW |
 | `Mind-Reply/own-core` | Shared templates/security guidance | CANONICAL CANDIDATE |
 
 ### A11-K organization
@@ -60,8 +60,8 @@ Policy: one functionally distinct product or system = one canonical repository.
 
 ## Known duplicate/copy families requiring content-level comparison
 
-- MindReply: `Mind-Reply/mindreply`, `Mind-Reply/mind-reply-core`, `Mind-Reply/mind-reply-app`, `angellllkr-eng/mind-reply-core`, `angellllkr-eng/mindreply`
-- MindReply sites: `Mind-Reply/mindreply-org-site` and `angellllkr-eng/mindreply-org-site`
+- MindReply: `Mind-Reply/mindreply-app`, `Mind-Reply/mind-reply-core`, `Mind-Reply/mind-reply-app`, `angellllkr-eng/mind-reply-core`, `angellllkr-eng/mindreply`
+- MindReply sites: `Mind-Reply/mindreply-app-org-site` and `angellllkr-eng/mindreply-org-site`
 - ResellerPro: `Mind-Reply/resellerpro`, `angellllkr-eng/resellerpro-platform`, `angellllkr-eng/reseller-pro-enterprise`
 - Real estate: `Mind-Reply/real-estate-value-radar`, `Mind-Reply/copy-of-real-estate-value-radar`, `angellllkr-eng/real-estate-value-radar`
 - MegaAgent: `Mind-Reply/megaagent-pc-builder`, `angellllkr-eng/megaagent-pc-builder`
