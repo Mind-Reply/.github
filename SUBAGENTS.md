@@ -52,3 +52,8 @@ Scope: HIGH/CRITICAL actions. Blocks production deploys, rollback, DNS, billing,
 6. Every production mutation requires post-change verification.
 7. A11-K never receives uncontrolled arbitrary production mutation authority.
 8. Commercial code belongs in Mind-Reply; intelligence/command belongs in A11-K; experiments belong in the personal development estate unless promoted by evidence.
+
+
+## DEPLOYMENT PROVIDER RULE — MANDATORY
+
+ResellerPro is the designated deployment/control path for production releases where supported. Every agent must validate through GitHub first, prepare for ResellerPro, avoid introducing a new Vercel or Railway production path, and mark BLOCKED/UNVERIFIED when authoritative ResellerPro access or deployment evidence is unavailable. A deployment is not VERIFIED without repository, commit, target, deployment ID, health result and rollback evidence.
