@@ -12,7 +12,7 @@ Policy: one functionally distinct production capability = one canonical reposito
 | A11-K | `Mind-Reply/A11-K` | Organization | Intelligence / command product |
 | Aurel | `Mind-Reply/Aurel` | Organization | Experience / strategic systems |
 | ResellerPro | `angellllkr-eng/resellerpro-platform` | Personal | Canonical source currently evidenced |
-| PatchTalk | `angellllkr-eng/patchtalk` | Personal | Product source pending organisational promotion |
+| PatchTalk | `Mind-Reply/whatsapp-ai-router` | Organization | Canonical WhatsApp / realtime conversation router |
 
 ## Canonical internal systems
 
@@ -82,3 +82,10 @@ Their consolidated experimental locations already exist inside the canonical pro
 ## Administrative limitation
 
 The connected GitHub capability currently supports source/branch/PR/content operations but does not expose repository rename, transfer or deletion administration. Therefore the naming policy and source-level branding have been normalised now; repository-name mutations themselves remain pending administrative access.
+
+
+## PatchTalk / WhatsApp
+
+Canonical product source: `Mind-Reply/whatsapp-ai-router`.
+
+Personal `angellllkr-eng/patchtalk` is retained as migration/provenance only. `angellllkr-eng/patchtalk-ux` is a private/public UX satellite, not a second PatchTalk production root.
