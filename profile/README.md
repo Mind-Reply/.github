@@ -1,40 +1,40 @@
-# Mind-Reply
+# MindReply
 
-Independent software workshop operated by Angel L. Krastev.
+A.K.-directed software and operating estate.
 
-## Canonical repository architecture
+## Brand system
 
-**Rule: one functionally distinct product or system = one canonical repository.**
+**MindReply** — commercial product and delivery brand.  
+**A11-K** — intelligence, command and owner-operating brand.  
+**ResellerPro** — deployment, domain, hosting and reseller control product.  
+**Aurel** — premium experience / strategic systems product.  
+**PatchTalk** — communications product.
 
-| Area | Canonical repository |
+Service brands:
+**LeadLeak Fix · Workflow Clinic · Site Rescue Desk · Fintech Signal Desk**
+
+Internal system names such as Crownline, Proofline, Nowline and Control Plane are not separate public brands.
+
+## Canonical sources
+
+| Brand | Canonical source |
 |---|---|
-| MindReply production | [`Mind-Reply/mindreply-app`](https://github.com/Mind-Reply/mindreply-app) |
-| MindReply documentation | [`Mind-Reply/mindreply-app-docs`](https://github.com/Mind-Reply/mindreply-app-docs) |
-| Public hub | [`Mind-Reply/angellllkr-eng.github.io`](https://github.com/Mind-Reply/angellllkr-eng.github.io) |
-| A11-K public surface | [`Mind-Reply/A11-K`](https://github.com/Mind-Reply/A11-K) |
-| ResellerPro | [`Mind-Reply/resellerpro`](https://github.com/Mind-Reply/resellerpro) |
-| Aether-X | [`Mind-Reply/aether-x`](https://github.com/Mind-Reply/aether-x) |
-| Kratos-S | [`Mind-Reply/kratos-s`](https://github.com/Mind-Reply/kratos-s) |
-| TapCraft | [`Mind-Reply/tapcraft`](https://github.com/Mind-Reply/tapcraft) |
-| RouteForge | [`Mind-Reply/routeforge`](https://github.com/Mind-Reply/routeforge) |
-| Aurel | [`Mind-Reply/Aurel`](https://github.com/Mind-Reply/Aurel) |
-| Shared standards | [`Mind-Reply/.github`](https://github.com/Mind-Reply/.github) |
+| MindReply | [Mind-Reply/mindreply-app](https://github.com/Mind-Reply/mindreply-app) |
+| A11-K | [Mind-Reply/A11-K](https://github.com/Mind-Reply/A11-K) |
+| Aurel | [Mind-Reply/Aurel](https://github.com/Mind-Reply/Aurel) |
+| ResellerPro | [angellllkr-eng/resellerpro-platform](https://github.com/angellllkr-eng/resellerpro-platform) |
+| PatchTalk | [angellllkr-eng/patchtalk](https://github.com/angellllkr-eng/patchtalk) |
 
-## A11-K organization
+## Naming rule
 
-Core A11-K work is kept under the separate [`A11-K`](https://github.com/A11-K) organization, including `a11k-core`, `a11k-command`, `a11k-ops`, `a11k-vision`, `a11k-achieve`, and `a11k-spaces`.
+One public name. One definition. One canonical production source.
 
-## Consolidation status
+Personal repositories are private engineering/provenance unless explicitly promoted. Duplicate-looking sources are compared and preserved before retirement.
 
-Known overlapping families are recorded in [`REPOSITORY_REGISTRY.md`](https://github.com/Mind-Reply/.github/blob/main/REPOSITORY_REGISTRY.md). They are **review candidates**, not automatically deleted repositories. Content, deployment dependencies, and history must be checked before consolidation.
+## Deployment rule
 
-Archived copies are treated as historical material, not production sources.
+All agents prepare releases through:
 
-## Operating rules
+**GitHub → validation → ResellerPro → smoke/health → evidence**
 
-1. Canonical source first; legacy sources second.
-2. No duplicate production deployments.
-3. Preserve history when consolidating.
-4. Never expose secrets or private data.
-5. Verify before rename, transfer, deletion, or deployment changes.
-6. Keep personal-only work under `angellllkr-eng`; organization production under its owning organization.
+No unverified deployment or production claim is accepted.
