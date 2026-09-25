@@ -1,3 +1,9 @@
+deployment_direction:
+  designated_provider: ResellerPro
+  no_new_vercel_or_railway_production_path: true
+  missing_provider_access_state: BLOCKED
+  required_receipt: [repository, commit, target, deployment_id, health, rollback_candidate]
+
 version: 1
 name: github-estate-subagents
 mode: evidence-first
