@@ -22,7 +22,7 @@ Purpose: one clear public identity per product, one canonical production source 
 | **ResellerPro** | Deployment, domain, hosting and reseller control product | `angellllkr-eng/resellerpro-platform` until an organisational source is explicitly verified |
 | **A11-K** | Intelligence, command and owner-operating product | `Mind-Reply/A11-K` |
 | **Aurel** | Premium experience / strategic systems product | `Mind-Reply/Aurel` |
-| **PatchTalk** | Communications and conversational delivery product | `angellllkr-eng/patchtalk` pending organisational promotion |
+| **PatchTalk** | Communications and conversational delivery product | `Mind-Reply/whatsapp-ai-router` |
 | **LeadLeak Fix** | Commercial service brand | Service property; repository must not invent a second public brand |
 | **Workflow Clinic** | Workflow diagnosis/repair service | Service property |
 | **Site Rescue Desk** | Website/conversion/release repair service | Service property |
