@@ -8,8 +8,8 @@ Independent software workshop operated by Angel L. Krastev.
 
 | Area | Canonical repository |
 |---|---|
-| MindReply production | [`Mind-Reply/mindreply`](https://github.com/Mind-Reply/mindreply) |
-| MindReply documentation | [`Mind-Reply/mindreply-docs`](https://github.com/Mind-Reply/mindreply-docs) |
+| MindReply production | [`Mind-Reply/mindreply-app`](https://github.com/Mind-Reply/mindreply-app) |
+| MindReply documentation | [`Mind-Reply/mindreply-app-docs`](https://github.com/Mind-Reply/mindreply-app-docs) |
 | Public hub | [`Mind-Reply/angellllkr-eng.github.io`](https://github.com/Mind-Reply/angellllkr-eng.github.io) |
 | A11-K public surface | [`Mind-Reply/A11-K`](https://github.com/Mind-Reply/A11-K) |
 | ResellerPro | [`Mind-Reply/resellerpro`](https://github.com/Mind-Reply/resellerpro) |
