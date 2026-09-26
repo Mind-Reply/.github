@@ -6,7 +6,7 @@ A.K.-directed software and operating estate.
 
 **MindReply** — commercial product and delivery brand.  
 **A11-K** — intelligence, command and owner-operating brand.  
-**ResellerPro** — deployment, domain, hosting and reseller control product.  
+**ResellerPro** — deployment, domain, hosting and reseller control product; canonical organization source is `Mind-Reply/resellerpro`.  
 **Aurel** — premium experience / strategic systems product.  
 **PatchTalk** — communications product.
 
@@ -22,7 +22,7 @@ Internal system names such as Crownline, Proofline, Nowline and Control Plane ar
 | MindReply | [Mind-Reply/mindreply-app](https://github.com/Mind-Reply/mindreply-app) |
 | A11-K | [Mind-Reply/A11-K](https://github.com/Mind-Reply/A11-K) |
 | Aurel | [Mind-Reply/Aurel](https://github.com/Mind-Reply/Aurel) |
-| ResellerPro | [angellllkr-eng/resellerpro-platform](https://github.com/angellllkr-eng/resellerpro-platform) |
+| ResellerPro | [Mind-Reply/resellerpro](https://github.com/Mind-Reply/resellerpro) |
 | PatchTalk | [Mind-Reply/whatsapp-ai-router](https://github.com/Mind-Reply/whatsapp-ai-router) |
 
 ## Naming rule
