@@ -1,6 +1,7 @@
 name: compliance-baseline
 
 on:
+  workflow_call:
   pull_request:
   push:
     branches: ["main", "master", "trunk"]
