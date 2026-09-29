@@ -1,0 +1,45 @@
+name: compliance-baseline
+
+on:
+  pull_request:
+  push:
+    branches: ["main", "master", "trunk"]
+
+permissions:
+  contents: read
+
+jobs:
+  baseline:
+    name: Repository compliance baseline
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reject obvious secret-bearing environment files
+        shell: bash
+        run: |
+          set -euo pipefail
+          if find . -type f \
+            \( -name '.env' -o -name '.env.*' -o -name '*.pem' -o -name '*.key' \) \
+            -not -path './.git/*' | grep -q .; then
+            echo "Potential credential-bearing file detected."
+            exit 1
+          fi
+
+      - name: Check for prohibited credential patterns
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -RInE --exclude-dir=.git --exclude='*.lock' \
+            '(BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|ghp_[A-Za-z0-9_]{20,}|github_pat_[A-Za-z0-9_]{20,})' .; then
+            echo "Potential credential material detected."
+            exit 1
+          fi
+
+      - name: Require security policy
+        shell: bash
+        run: |
+          test -f SECURITY.md || test -f .github/SECURITY.md || {
+            echo "SECURITY.md is required for baseline adoption."
+            exit 1
+          }
