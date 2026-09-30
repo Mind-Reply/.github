@@ -40,4 +40,4 @@ CRITICAL: explicit approval plus verification and rollback capability.
 
 ## Recovery
 
-A production mutation is incomplete until post-change verification succeeds. Failed verification must enter a visible BLOCKED, DEGRADED or RECOVERING state and expose a rollback target when one exists.
+A production mutation is incomplete until post-change verification succeeds. Failed verification must enter a visible PENDING_ACTION, DEGRADED or RECOVERING state and expose a rollback target when one exists.
