@@ -23,7 +23,7 @@ Production state is established only by an explicit verification receipt contain
 - observed result
 - state
 
-Allowed states include PLANNED, IMPLEMENTED, BUILT, PREVIEW, VERIFIED, PRODUCTION, DEGRADED, DOWN, BLOCKED, STALE, UNKNOWN and RECOVERING.
+Allowed states include PLANNED, IMPLEMENTED, BUILT, PREVIEW, VERIFIED, PRODUCTION, DEGRADED, DOWN, PENDING_ACTION, STALE, UNKNOWN and RECOVERING.
 
 ## Integration boundary
 
