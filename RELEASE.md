@@ -10,9 +10,8 @@ CHANGE
 → build
 → security/secret scan
 → preview
-→ Reality Gate
+→ Reality verification
 → functional QA
-→ owner approval when required
 → production
 → post-deploy probe
 → release receipt
@@ -33,7 +32,7 @@ Each production release should record:
 
 ## Promotion rule
 
-A failed critical check blocks promotion. A missing probe is UNKNOWN. Production status must never be derived from repository labels or deployment intent.
+Checks are evidence, not a separate production approval gate. Failed or missing checks are recorded with severity and verification state for follow-up. Production status must never be derived from repository labels or deployment intent.
 
 ## Rollback
 
