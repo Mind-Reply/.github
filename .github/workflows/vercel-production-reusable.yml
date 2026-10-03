@@ -29,7 +29,6 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -44,7 +43,7 @@ jobs:
         run: pnpm build
       - name: Install Vercel CLI
         run: pnpm add --global vercel@latest
-      - name: Deploy production
+      - name: Deploy
         run: vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN"
       - name: Record release receipt
         run: |
