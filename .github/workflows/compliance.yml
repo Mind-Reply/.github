@@ -22,6 +22,7 @@ jobs:
           set -euo pipefail
           if find . -type f \
             \( -name '.env' -o -name '.env.*' -o -name '*.pem' -o -name '*.key' \) \
+            ! -name '*.example' \
             -not -path './.git/*' | grep -q .; then
             echo "Potential credential-bearing file detected."
             exit 1
