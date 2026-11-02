@@ -3,7 +3,8 @@
 An independent, founder-directed software and engineering portfolio.
 
 **Founder & Human Owner: Angel L. Krastev (A.K.)**  
-**Role:** Founder, Engineering Systems Architect & Final Approval Authority.
+**Position:** Independent Technology Founder & Engineering Systems Architect.  
+**Authority:** Human owner and final approval authority for consequential portfolio decisions.
 
 The portfolio is owner-directed. Product ownership, institutional affiliation, customer relationships, deployments and commercial results are stated only where supported by the relevant records.
 
@@ -30,15 +31,19 @@ Internal system names such as Crownline, Proofline, Nowline and Control Plane ar
 | Brand | Canonical source |
 |---|---|
 | MindReply | [Mind-Reply/mindreply-app](https://github.com/Mind-Reply/mindreply-app) |
-| A11-K | [Mind-Reply/A11-K](https://github.com/Mind-Reply/A11-K) |
+| A11-K | [angellllkr-eng/A11-K](https://github.com/angellllkr-eng/A11-K) |
 | Aurel | [Mind-Reply/Aurel](https://github.com/Mind-Reply/Aurel) |
-| ResellerPro | [Mind-Reply/resellerpro](https://github.com/Mind-Reply/resellerpro) |
+| ResellerPro | [angellllkr-eng/resellerpro-platform](https://github.com/angellllkr-eng/resellerpro-platform) |
 | PatchTalk | [Mind-Reply/whatsapp-ai-router](https://github.com/Mind-Reply/whatsapp-ai-router) |
+
+## Public founder portfolio
+
+The consolidated founder portfolio is published at [Angel L. Krastev — Public Portfolio](https://mind-reply.github.io/angellllkr-eng.github.io/).
 
 ## Operating principles
 
 - **System proposes. Owner commands. Automation executes only after approval.**
-- One public name, one definition and one canonical production source.
+- One public name, one definition and one canonical engineering source.
 - Repository contents establish source history, not production health.
 - Runtime, customer, revenue, investment, award, partnership and external-recognition claims require separate evidence.
 - Consequential changes remain subject to explicit owner approval.
